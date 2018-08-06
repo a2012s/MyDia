@@ -3,7 +3,7 @@ package wmz.myapplication;
 /**
  * Created by wjj on 2018/8/4 11:44
  * E-Mail ：wjj99@qq.com
- * 描述：
+ * 描述：自定义加载框
  */
 
 import android.app.Dialog;
@@ -81,6 +81,10 @@ public class MyDialog {
         dialog.show();
     }
 
+
+    public void dismiss() {
+        dialog.dismiss();
+    }
 
 
 }

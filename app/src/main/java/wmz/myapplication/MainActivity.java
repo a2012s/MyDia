@@ -117,9 +117,6 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.setProgressStyle(ProgressDialog.BUTTON_NEUTRAL);
         }
         progressDialog.setMessage("加载中");
-        // progressDialog.setIcon(R.mipmap.ic_launcher);
-
-
         progressDialog.setCancelable(true);
         progressDialog.show();
     }
