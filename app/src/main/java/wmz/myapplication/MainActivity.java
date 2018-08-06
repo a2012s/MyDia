@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //使用 CommonBaseDialog核心代码
-                CommonBaseDialog.showDialog2Button(MainActivity.this)
+                CommonBaseDialog.showDialog1Button(MainActivity.this)
                         .setTitle("提示")
                         .setContent("确认取消订单?")
-                        .setViewListener2Button(new CommonBaseDialog.OnCloseListener() {
+                        .setViewListenerButton(new CommonBaseDialog.OnCloseListener() {
                             @Override
                             public void onClick(Dialog dialog, int viewId) {
                                 if (viewId == R.id.confirm) {

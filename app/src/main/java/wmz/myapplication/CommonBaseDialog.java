@@ -65,6 +65,15 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
         return showDialog(mContext, R.layout.common_dialog);
     }
 
+    /**
+     * 只有一个确定按钮的时候
+     * @param mContext
+     * @return
+     */
+    public static CommonBaseDialog showDialog1Button(Context mContext) {
+        return showDialog(mContext, R.layout.common_dialog_1);
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(itemLayoutId);
@@ -103,7 +112,13 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-    public CommonBaseDialog setViewListener2Button(OnCloseListener listener) {
+    /**
+     * 因为布局有添加confirm和cancel两个id，所以无论一个还是两个，这个不变。
+     *
+     * @param listener
+     * @return
+     */
+    public CommonBaseDialog setViewListenerButton(OnCloseListener listener) {
         this.mListener = listener;
         confirmId = R.id.confirm;
         cancelId = R.id.cancel;
