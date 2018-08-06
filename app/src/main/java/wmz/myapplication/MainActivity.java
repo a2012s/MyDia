@@ -2,7 +2,9 @@ package wmz.myapplication;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -33,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(Dialog dialog, int viewId) {
                                 if (viewId == R.id.confirm) {
                                     Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
-
+                                    dialog.dismiss();
                                 } else if (viewId == R.id.cancel) {
+                                    dialog.dismiss();
                                 }
 
                             }
@@ -54,6 +57,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                        // .setIcon(R.mipmap.icon)//设置标题的图片
+                        .setTitle("我是对话框")//设置对话框的标题
+                        .setMessage("我是对话框的内容")//设置对话框的内容
+                        //设置对话框的按钮
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "点击了取消按钮", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "点击了确定的按钮", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }).create();
+                dialog.show();
+
+            }
+        });
 
         findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
             @Override

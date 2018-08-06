@@ -107,8 +107,6 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
         this.mListener = listener;
         confirmId = R.id.confirm;
         cancelId = R.id.cancel;
-        setCancelId(R.id.confirm);
-        setConfirmId(confirmId);
         findViewById(confirmId).setOnClickListener(this);
         findViewById(cancelId).setOnClickListener(this);
         return this;
@@ -120,7 +118,7 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
         if (mListener != null) {
             mListener.onClick(this, v.getId());
         }
-        this.dismiss();
+
     }
 
     public <T extends View> T getView(int viewId) {
