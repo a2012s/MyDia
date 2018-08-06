@@ -45,11 +45,11 @@ public class MyDialog {
         LinearLayout layout = (LinearLayout) v.findViewById(R.id.dialog_view);// 加载布局
 
         // loading_dialog.xml中的TextView
-        TextView tipTextView = (TextView) v.findViewById(R.id.tipTextView);// 提示文字
+        TextView tipTextView = (TextView) v.findViewById(R.id.loading_tipTextView);// 提示文字
         tipTextView.setText(msg);// 设置加载信息（如：登录中，请稍候...）
 
         // loading_dialog.xml中的ImageView
-        spaceshipImage = (ImageView) v.findViewById(R.id.img);
+        spaceshipImage = (ImageView) v.findViewById(R.id.iv_loading_img);
         // 加载动画load_animation.xml
         anim = AnimationUtils.loadAnimation(context, R.anim.load_animation);
         // 使用ImageView显示动画
@@ -58,6 +58,7 @@ public class MyDialog {
 
         // 创建自定义样式loading_dialog
         Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);
+        loadingDialog.setCanceledOnTouchOutside(false);//点击屏幕，不会消失
         loadingDialog.setCancelable(true);// 可以用“返回键”取消
         // 设置布局
         loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
@@ -72,6 +73,11 @@ public class MyDialog {
         }
     }
 
+    /**
+     * 显示加载框
+     *
+     * @param context
+     */
     public void show(Context context) {
         if (dialog == null) {
             dialog = createLoadingDialog(context, "加载中……");
@@ -82,8 +88,26 @@ public class MyDialog {
     }
 
 
+    /**
+     * 隐藏加载框
+     */
     public void dismiss() {
-        dialog.dismiss();
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+
+    }
+
+    /**
+     * 清除
+     */
+    public void clear() {
+        if (dialog != null) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            dialog = null;
+        }
     }
 
 

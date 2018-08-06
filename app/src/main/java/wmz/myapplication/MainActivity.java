@@ -1,9 +1,12 @@
 package wmz.myapplication;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,7 +16,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
-    Dialog dialog2;
     MyDialog myDialog;
 
     @Override
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 加载框
+     * 系统加载框
      */
     public void buildProgressDialog() {
 
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
         progressDialog.setMessage("加载中");
         progressDialog.setCancelable(true);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
     }
 
@@ -134,5 +137,13 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-
+    // @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAndRemoveTask();
+        }
+    }
 }
