@@ -1,14 +1,8 @@
 package wmz.myapplication;
 
-/**
- * Created by wjj on 2018/8/4 11:44
- * E-Mail ：wjj99@qq.com
- * 描述：自定义加载框
- */
 
 import android.app.Dialog;
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,8 +11,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * Created by wjj on 2018/8/4 11:44
+ * E-Mail ：wjj99@qq.com
+ * 描述：自定义加载框
+ */
 
-public class MyDialog {
+public class MyLoadingDialog {
 
 
     Dialog dialog;
