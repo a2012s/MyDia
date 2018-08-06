@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Toast;
 
 
@@ -26,24 +25,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //使用 CommonBaseDialog核心代码
-                CommonBaseDialog.showDialog(MainActivity.this, R.layout.common_dialog)
-                        .setText(R.id.title, "提示")
-                        //.setDialogLocation(Gravity.CENTER, 100, 0, 100, 0)
-                        .setText(R.id.content, "确认取消订单?")
-                        .setViewListener(new CommonBaseDialog.OnCloseListener() {
+                CommonBaseDialog.showDialog2Button(MainActivity.this)
+                        .setTitle("提示")
+                        .setContent("确认取消订单?")
+                        .setViewListener2Button(new CommonBaseDialog.OnCloseListener() {
                             @Override
                             public void onClick(Dialog dialog, int viewId) {
-                                switch (viewId) {
-                                    case R.id.confirm:
-                                        Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
-                                        buildProgressDialog();
-                                    case R.id.cancel:
-                                        dialog.dismiss();
-                                        cancelProgressDialog();
-                                        break;
+                                if (viewId == R.id.confirm) {
+                                    Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
+
+                                } else if (viewId == R.id.cancel) {
                                 }
+
                             }
-                        }, R.id.cancel, R.id.confirm);
+                        });
+//                        .setViewListener(new CommonBaseDialog.OnCloseListener() {
+//                            @Override
+//                            public void onClick(Dialog dialog, int viewId) {
+//                                switch (viewId) {
+//                                    case R.id.confirm:
+//                                        Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
+//                                    case R.id.cancel:
+//                                        dialog.dismiss();
+//                                        break;
+//                                }
+//                            }
+//                        }, R.id.cancel, R.id.confirm);
             }
         });
 
@@ -61,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                myDialog=new MyDialog();
+                myDialog = new MyDialog();
                 myDialog.show(MainActivity.this);
 
 

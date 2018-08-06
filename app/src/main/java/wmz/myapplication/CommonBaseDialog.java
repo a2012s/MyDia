@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -18,6 +19,25 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
     private int itemLayoutId;
     private OnCloseListener mListener;
     private boolean mIsDismiss = false;
+
+    private int confirmId;//确定
+    private int cancelId;//取消
+
+    public int getConfirmId() {
+        return confirmId;
+    }
+
+    public void setConfirmId(int confirmId) {
+        this.confirmId = confirmId;
+    }
+
+    public int getCancelId() {
+        return cancelId;
+    }
+
+    public void setCancelId(int cancelId) {
+        this.cancelId = cancelId;
+    }
 
     public interface OnCloseListener {
         void onClick(Dialog dialog, int viewId);
@@ -34,6 +54,13 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
         return dialog;
     }
 
+
+    /**
+     * 显示两个按钮（确定和取消）
+     *
+     * @param mContext
+     * @return
+     */
     public static CommonBaseDialog showDialog2Button(Context mContext) {
         return showDialog(mContext, R.layout.common_dialog);
     }
@@ -76,6 +103,26 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
+    public CommonBaseDialog setViewListener2Button(OnCloseListener listener) {
+        this.mListener = listener;
+        confirmId = R.id.confirm;
+        cancelId = R.id.cancel;
+        setCancelId(R.id.confirm);
+        setConfirmId(confirmId);
+        findViewById(confirmId).setOnClickListener(this);
+        findViewById(cancelId).setOnClickListener(this);
+        return this;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (mListener != null) {
+            mListener.onClick(this, v.getId());
+        }
+        this.dismiss();
+    }
+
     public <T extends View> T getView(int viewId) {
         return (T) findViewById(viewId);
     }
@@ -87,11 +134,26 @@ public class CommonBaseDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (mListener != null) {
-            mListener.onClick(this, v.getId());
-        }
+
+    /**
+     * 设置标题title
+     *
+     * @param text
+     * @return
+     */
+    public CommonBaseDialog setTitle(String text) {
+        return setText(R.id.title, text);
     }
+
+    /**
+     * 设置内容
+     *
+     * @param text
+     * @return
+     */
+    public CommonBaseDialog setContent(String text) {
+        return setText(R.id.content, text);
+    }
+
 
 }
